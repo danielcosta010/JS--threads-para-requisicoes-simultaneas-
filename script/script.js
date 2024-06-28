@@ -1,3 +1,5 @@
+import imprimeCotacao from "./imprimeCotacao.js";
+
 const graficoDolar = document.getElementById('graficoDolar');
 
 const graficoParaDolar = new Chart(graficoDolar, {
@@ -14,11 +16,11 @@ const graficoParaDolar = new Chart(graficoDolar, {
 
 async function conectaAPI() {
   const conecta = await fetch("https://economia.awesomeapi.com.br/json/last/USD-BRL")
-  const conectaTraduzido = await conecta.json()
+  const conectaTraduzido = await conecta.json();
   const hora = geraHorario();
-  const valor = conectaTraduzido.USDBRL.ask
-  adicionaDados(graficoParaDolar, hora, valor)
-  
+  const valor = conectaTraduzido.USDBRL.ask;
+  adicionaDados(graficoParaDolar, hora, valor);
+  imprimeCotacao('Dolar', valor)
 }
 
 setInterval(() => conectaAPI(), 5000);
